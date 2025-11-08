@@ -1,0 +1,6 @@
+CREATE DATABASE IF NOT EXISTS `nvr-manager`;
+CREATE USER IF NOT EXISTS 'nvr-manager'@'localhost' IDENTIFIED BY '000000';
+GRANT ALL PRIVILEGES ON `nvr-manager`.* TO 'nvr-manager'@'localhost';
+CREATE USER IF NOT EXISTS 'zzu'@ IDENTIFIED BY 'zzuiotlab316';
+GRANT ALL PRIVILEGES ON *.* TO 'zzu'@;
+FLUSH PRIVILEGES;

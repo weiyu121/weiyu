@@ -1,0 +1,15 @@
+[Unit]
+Description=智能监控系统
+After=network.target srs.service mysql.service
+Wants=srs.service mysql.service
+
+[Service]
+User=root
+Environment="PATH=/usr/local/conda/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/sbin:$PATH"
+WorkingDirectory=/usr/local/nvr-manager/src
+# [-w 1 --threads 8]解释：不能用单线程，因为在一次请求中可能会发出其他请求，也不能用多进程，因为用到了全局变量
+ExecStart=/usr/local/conda/envs/nvr-manager/bin/python -m gunicorn --chdir ../ server:app -b 0.0.0.0:5000 -w 1 --threads 8 --access-logfile -
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
